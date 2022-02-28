@@ -14,7 +14,7 @@ def parse_arguments():
     parser.add_argument('--lr_2', type=float, default=1e-2, help="learning rate for u")
     parser.add_argument('--alpha_1', type=float, default=0., help="momentum rate for v and b")
     parser.add_argument('--alpha_2', type=float, default=0., help="momentum rate for u")
-    parser.add_argument('--n_hid', type=int, default=16, help="size of hidden layer")
+    parser.add_argument('--n_hid', type=int, default=32, help="size of hidden layer")
     parser.add_argument('--n_epoch', type=int, default=30000, help="Max training epochs")
     parser.add_argument('--type', choices=['vanilla', 'minmax'], default='vanilla', help="choose the training model type")
     parser.add_argument('--model', choices=['mlp', 'mlqp'], default='mlp', help="use mlp or mlqp for training")
