@@ -64,7 +64,7 @@ def train_vanillanet(args):
         if best_loss - train_loss > 0.0001:
             best_loss = train_loss
             best_epoch = epoch
-        elif epoch - best_epoch >= 100:
+        elif epoch - best_epoch >= 200:
             break
 
     # save files
@@ -126,7 +126,7 @@ def train_minmax_sequential(args):
         if best_loss - train_loss > 0.0001:
             best_loss = train_loss
             best_epoch = epoch
-        elif epoch - best_epoch >= 100:
+        elif epoch - best_epoch >= 200:
             break
 
     # Visualization and save files
@@ -155,7 +155,7 @@ def train_one_model(model, data, args):
         if best_loss - train_loss > 0.0001:
             best_loss = train_loss
             best_epoch = epoch
-        elif epoch - best_epoch >= 100:
+        elif epoch - best_epoch >= 200:
             break
     return model
 
