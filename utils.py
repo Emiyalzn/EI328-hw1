@@ -78,10 +78,11 @@ def plot_datapoints(white_subsets, black_subsets):
         for j in range(num_partition):
             ax[i][j].set_xlim([-7,7])
             ax[i][j].set_ylim([-7,7])
-            ax[i][j].scatter(white_subsets[i][0], white_subsets[i][1], c='w')
-            ax[i][j].scatter(black_subsets[j][0], black_subsets[j][1], c='black')
+            # we transpose the matrix here to keep corresponding with the pcolormesh function
+            ax[i][j].scatter(white_subsets[i][1], white_subsets[i][0], c='w')
+            ax[i][j].scatter(black_subsets[j][1], black_subsets[j][0], c='black')
     fig.tight_layout()
-    plt.savefig(os.path.join(result_dir, "data_distribution.png"), bbox_inches='tight')
+    plt.savefig(os.path.join(result_dir, "partition_data_distribution.png"), bbox_inches='tight')
 
 def plot_minmax_boundaries(models, model_name, mode):
     partition_num = len(models)
