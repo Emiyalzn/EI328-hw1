@@ -78,9 +78,8 @@ def plot_datapoints(white_subsets, black_subsets):
         for j in range(num_partition):
             ax[i][j].set_xlim([-7,7])
             ax[i][j].set_ylim([-7,7])
-            # we transpose the matrix here to keep corresponding with the pcolormesh function
-            ax[i][j].scatter(white_subsets[i][1], white_subsets[i][0], c='w')
-            ax[i][j].scatter(black_subsets[j][1], black_subsets[j][0], c='black')
+            ax[i][j].scatter(white_subsets[i][0], white_subsets[i][1], c='w')
+            ax[i][j].scatter(black_subsets[j][0], black_subsets[j][1], c='black')
     fig.tight_layout()
     plt.savefig(os.path.join(result_dir, "partition_data_distribution.png"), bbox_inches='tight')
 
@@ -101,17 +100,17 @@ def plot_minmax_boundaries(models, model_name, mode):
                 for n, y in enumerate(yrange):
                     coor_predictions[m,n] = 1 if models[i][j].forward(np.array([x,y])) > 0.5 else 0
             preds[i].append(deepcopy(coor_predictions))
-            ax[i,j].pcolormesh(xrange, yrange, coor_predictions, cmap="gray", antialiased=True)
+            ax[i,j].pcolormesh(xrange, yrange, coor_predictions.T, cmap="gray", antialiased=True)
     fig.tight_layout()
     fig.savefig(os.path.join(result_dir, f"{model_name}_minmaxnet.png"))
     for i in range(partition_num):
         min_pred = np.min(preds[i],axis=0)
         min_preds.append(deepcopy(min_pred))
-        ax_min[i].pcolormesh(xrange, yrange, min_pred, cmap="gray", antialiased=True)
+        ax_min[i].pcolormesh(xrange, yrange, min_pred.T, cmap="gray", antialiased=True)
     fig_min.tight_layout()
     fig_min.savefig(os.path.join(result_dir, f"{model_name}_mingates.png"))
     max_pred = np.max(min_preds,axis=0)
-    ax_max.pcolormesh(xrange, yrange, max_pred, cmap="gray", antialiased=True)
+    ax_max.pcolormesh(xrange, yrange, max_pred.T, cmap="gray", antialiased=True)
     fig_max.tight_layout()
     fig_max.savefig(os.path.join(result_dir, "partition", f"{model_name}_{mode}_{partition_num}_maxgate.png"))
 
@@ -123,7 +122,7 @@ def plot_boundaries(model, model_name, lr1, lr2, alpha):
     for i, x in enumerate(xrange):
         for j, y in  enumerate(yrange):
             coor_predictions[i,j] = 1 if model.forward(np.array([x,y])) > 0.5 else 0
-    ax.pcolormesh(xrange, yrange, coor_predictions, cmap="gray", antialiased=True)
+    ax.pcolormesh(xrange, yrange, coor_predictions.T, cmap="gray", antialiased=True)
     fig.tight_layout()
     fig.savefig(os.path.join(result_dir, "lr+alpha", f"{model_name}_{lr1}_{lr2}_{alpha}_prediction.png"))
 

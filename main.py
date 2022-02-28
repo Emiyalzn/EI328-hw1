@@ -59,7 +59,7 @@ def train_vanillanet(args):
         test_accs.append(test_acc)
         if epoch % 10 == 0:
             print(f"Epoch {epoch}, Time {curr_time:.2f}, Loss {train_loss:.4f}, Train acc {train_acc:.4f}, Test acc {test_acc:.4f}")
-
+        
         # early stopping
         if best_loss - train_loss > 0.0001:
             best_loss = train_loss
