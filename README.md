@@ -8,27 +8,21 @@ Python3.8 + numpy.
 The forwardpropagation rule for MLQP is defined as:
 
 $$
-
 x_{kj}=f(\sum_{i=1}^{N_{k-1}}(u_{kji}x_{k-1,i}^2+v_{kji}x_{k-1,i})+b_{kj})=f(\hat{x}_{kj})
-
 $$
 
 The backpropagation rule for MLQP is:
 
 $$
-
 \delta_{kj} =f'(\hat{x}_{kj})\sum_{i=1}^{N_{k+1}}\delta_{k+1,i}(2u_{k+1,ij}x_{kj}+v_{k+1,ij})
-
 $$
 
 Then we can update the parameters by:
 
 $$
-
 \Delta u_{kji}(t+1)=\alpha_u\Delta u_{kji}(t)+\eta_u\delta_{kj}x_{k-1,t}^2 \\
 \Delta v_{kji}(t+1)=\alpha_v\Delta v_{kji}(t)+\eta_v\delta_{kj}x_{k-1,t} \\
 \Delta b_{kj}(t+1)=\alpha_b\Delta b_{kj}(t)+\eta_b\delta_{kj}
-
 $$
 
 # Run Experiments
